@@ -2,14 +2,83 @@
 <html>
 <head>
   <title>GT Lap Simulator</title>
+
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+      color: white;
+      margin: 0;
+    }
+
+    .card {
+      max-width: 500px;
+      margin: 80px auto;
+      padding: 30px;
+      background: #111;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #bbb;
+    }
+
+    input, select {
+      width: 70%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      background: #00c2ff;
+      color: black;
+      border: none;
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: white;
+    }
+
+    .secondary {
+      background: #333;
+      color: white;
+    }
+
+    .secondary:hover {
+      background: #555;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #00c2ff;
+    }
+  </style>
 </head>
 
-<body style="text-align:center; font-family:sans-serif; background:#111; color:white;">
+<body>
+
+<div class="card">
 
 <h1>GT Car Lap Time Simulator</h1>
 
-<p>Select your driving skill (1–10):</p>
-<input id="skill" type="number" min="1" max="10">
+<p>Select your driving skill (1-10):</p>
+<input id="skill" type="number" min="1" max="10" placeholder="Enter skill level">
 
 <p>Select GT Class:</p>
 <select id="car">
@@ -19,20 +88,34 @@
 </select>
 
 <br><br>
+
 <button onclick="simulate()">Run Simulation</button>
+<button class="secondary" onclick="resetFields()">Reset</button>
 
 <p id="result"></p>
+
+</div>
 
 <script>
 function simulate() {
   let skill = document.getElementById("skill").value;
   let car = document.getElementById("car").value;
 
+  if (!skill || skill < 1 || skill > 10) {
+    document.getElementById("result").innerText = "Enter a skill level between 1 and 10.";
+    return;
+  }
+
   let base = 120;
   let time = base - (skill * 3) - car + Math.random() * 4;
 
   document.getElementById("result").innerText =
     "Estimated Lap Time: " + time.toFixed(2) + " seconds";
+}
+
+function resetFields() {
+  document.getElementById("skill").value = "";
+  document.getElementById("result").innerText = "";
 }
 </script>
 

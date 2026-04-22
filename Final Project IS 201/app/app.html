@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lap Time Simulator</title>
+</head>
+
+<body style="text-align:center; font-family:sans-serif;">
+
+<h1>Track Lap Time Simulator</h1>
+
+<p>Enter your skill level (1–10):</p>
+<input id="skill" type="number">
+
+<button onclick="simulate()">Simulate Lap</button>
+
+<p id="result"></p>
+
+<script>
+function simulate() {
+  let skill = document.getElementById("skill").value;
+  let time = 120 - (skill * 3) + Math.random() * 5;
+
+  document.getElementById("result").innerText =
+    "Estimated Lap Time: " + time.toFixed(2) + " seconds";
+}
+</script>
+
+</body>
+</html>
